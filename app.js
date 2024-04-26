@@ -10,7 +10,7 @@ app.get('/', (req, res) => {
 app.get('/setkeyvalue', (req, res) => {
     const key = req.query.key;
     const value = req.query.value;
-    const secret = req.query.secret;
+    const secret = req.headers.secret;
     if (!key || !value || !secret || secret !== process.env.SECRET) {
         return res.status(400).send('Bad Request.');
     }
@@ -20,7 +20,7 @@ app.get('/setkeyvalue', (req, res) => {
 
 app.get('/getkeyvalue', (req, res) => {
     const key = req.query.key;
-    const secret = req.query.secret;
+    const secret = req.headers.secret;
     if (!key || !secret || secret !== process.env.SECRET) {
         return res.status(400).send('Bad Request.');
     }
